@@ -26,8 +26,8 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
-    test_guild = discord.Object(id=GUILD_ID)
-    await bot.tree.sync(guild=test_guild)
+    #test_guild = discord.Object(id=GUILD_ID)
+    await bot.tree.sync()
     print(f"{bot.user} is online")
 
 # @bot.event 
@@ -71,7 +71,7 @@ async def play(interaction:discord.Interaction, song_query: str):
     title = first_track.get("title", "Untitled")
 
     ffmpeg_options = {
-        "befor_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay max 5",
+        "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay max 5",
         "options": "-vn -c:a libopus -b:a 96k",
     }
 
