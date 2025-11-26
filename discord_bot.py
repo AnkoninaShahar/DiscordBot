@@ -9,7 +9,7 @@ import asyncio
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
-# GUILD_ID = 
+GUILD_ID = 820497690609713153
 
 async def search_ytdlp_async(query, ydl_opts):
     loop = asyncio.get_running_loop()
@@ -25,16 +25,16 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
-async def On_ready():
-    # test_guilf = discord.Object(id=GUILD_ID)
-    await bot.tree.sync() # guild=test_guild
+async def on_ready():
+    test_guild = discord.Object(id=GUILD_ID)
+    await bot.tree.sync(guild=test_guild)
     print(f"{bot.user} is online")
 
-@bot.event 
-async def on_message(msg):
-    print(msg.guild.id)
+# @bot.event 
+# async def on_message(msg):
+#     print(msg.guild.id)
 
-@bot.command(name="Play", description="Plays a song or add it to the queue.")
+@bot.tree.command(name="play", description="Plays a song or add it to the queue.")
 @app_commands.describe(song_query="Search query")
 async def play(interaction:discord.Interaction, song_query: str):
     await interaction.response.defer()
